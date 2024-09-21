@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "5b58cf7b-4a74-42fc-a514-e522b7f7c2ef",
+		"name": "Product API Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Products",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/all_products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"all_products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Products with Pagination - GET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/products?limit=5&page=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"products"
+					],
+					"query": [
+						{
+							"key": "limit",
+							"value": "5"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Products with Pagination - POST",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"limit\": 5,\n    \"page\": 1\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product by ID - GET",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/products/8365736d-599d-4489-a262-8dc270afeba6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"products",
+						"8365736d-599d-4489-a262-8dc270afeba6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product by ID - POST",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"product_id\": \"8365736d-599d-4489-a262-8dc270afeba6\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/products_id",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"products_id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Similar Products by Product ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/product_similarity/8365736d-599d-4489-a262-8dc270afeba6",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"product_similarity",
+						"8365736d-599d-4489-a262-8dc270afeba6"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

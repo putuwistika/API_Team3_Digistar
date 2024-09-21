@@ -13,6 +13,11 @@ This API allows you to retrieve product data from a PostgreSQL database. It supp
 
 The data is loaded from the PostgreSQL database into memory at the start of the application for faster response times.
 
+
+Untuk melakukan Testing menggunakan Postman berikut [Postman.json](postman.json) yang dapat digunakan
+[Postman.json](postman.json)
+
+
 ---
 ## Daftar Endpoint
 
