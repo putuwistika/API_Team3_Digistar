@@ -3,7 +3,7 @@
 
 ## Overview
 
-This API allows you to retrieve product data from a PostgreSQL database. It supports three main endpoints:
+This API allows you to retrieve product data from a PostgreSQL database and Machine Learning Model with Python. It supports three main endpoints:
 1. Retrieve all product data.
 2. Retrieve product data with pagination using GET method.
 3. Retrieve product data with pagination using POST method.
