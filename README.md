@@ -7,6 +7,8 @@ This API allows you to retrieve product data from a PostgreSQL database. It supp
 1. Retrieve all product data.
 2. Retrieve product data with pagination using GET method.
 3. Retrieve product data with pagination using POST method.
+4. Retrieve product data with products_id using GET method.
+5. Retrieve product data with products_id using POST method.
 
 The data is loaded from the PostgreSQL database into memory at the start of the application for faster response times.
 
@@ -131,16 +133,90 @@ This endpoint allows you to retrieve product data with pagination using a JSON b
 ]
 ```
 
+### 4. Get Product by ID (GET Method)
+Retrieve a product by its `product_id`.
+
+**Endpoint**: `/api/products/<product_id>`  
+**Method**: `GET`
+
+#### URL:
+```
+GET api/products/<product_id>
+```
+
+#### Example:
+```bash
+GET /api/products/00019f29-ef3b-4eb2-b078-0820081d9b3e
+```
+
+#### Response:
+```json
+{
+  "product_id": "123",
+  "product_name": "Product A",
+  "product_price": 10000,
+  "stok": 50,
+  "jumlah_terjual": 20,
+  "rating": 4.5,
+  "image_srcset": "/images/product_a.jpg",
+  "kategori": "Category 1",
+  "brand": "Brand A",
+  "min_pembelian": 1,
+  "berat_satuan": "500g",
+  "dimensi_ukuran": "10x10x10cm",
+  "dikirim_dari": "Jakarta",
+  "penjual": "Seller A",
+  "description": "Description of Product A"
+}
+```
+
+#### Error Response:
+If the product is not found:
+```json
+{
+  "error": "Product not found"
+}
+```
+
+### 5. Get Product by ID (POST Method)
+Retrieve a product by `product_id` using JSON request body.
+
+
+**Endpoint**: `/api/products_id`  
+**Method**: `POST`
+
+#### URL:
+```
+POST /api/products_id
+```
+
+#### Request Body:
+```json
+{
+  "product_id": "00019f29-ef3b-4eb2-b078-0820081d9b3e"
+}
+```
+
+#### Response:
+Same as the GET method for retrieving a product by ID.
+
+#### Error Response:
+If `product_id` is missing in the request body:
+```json
+{
+  "error": "Missing product_id in the request body"
+}
+```
+
+
 ---
 
 ## Error Handling
 
-In case of an error, the API will return a response with an `error` key and a descriptive error message.
-
-**Example Error Response**:
+All endpoints will return a JSON response with an error message in case of failure or invalid input. For example:
 ```json
 {
-    "error": "Invalid page number"
+  "error": "Product not found"
 }
 ```
 
@@ -154,6 +230,3 @@ In case of an error, the API will return a response with an `error` key and a de
 
 ---
 
-## License
-
-This project is open-source and available under the MIT License.
