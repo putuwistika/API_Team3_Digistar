@@ -9,193 +9,248 @@ This API allows you to retrieve product data from a PostgreSQL database. It supp
 3. Retrieve product data with pagination using POST method.
 4. Retrieve product data with products_id using GET method.
 5. Retrieve product data with products_id using POST method.
+6. Get Similar Products (Recomendations) by Product ID using GET method.
 
 The data is loaded from the PostgreSQL database into memory at the start of the application for faster response times.
 
 ---
+## Daftar Endpoint
 
-## Endpoints
+### 1. Get All Products (Tanpa Pagination)
 
-### 1. Get All Products (Without Pagination)
+**Endpoint**: `/api/all_products`
 
-**Endpoint**: `/api/all_products`  
 **Method**: `GET`
 
-**Description**:  
-This endpoint returns all the product data in the database without pagination.
+**Deskripsi**: Mengambil semua produk dari database tanpa menggunakan pagination.
 
-**Response Example**:
+#### Cara Penggunaan:
+```bash
+GET http://localhost:5000/api/all_products
+```
+
+#### Response Contoh:
 ```json
 [
     {
-        "product_id": 1,
-        "product_name": "Product A",
-        "product_price": 50000,
-        "stok": 100,
-        "jumlah_terjual": 50,
-        "rating": 4.5,
-        "image_srcset": "image_a.jpg"
-    },
-    {
-        "product_id": 2,
-        "product_name": "Product B",
-        "product_price": 75000,
-        "stok": 200,
-        "jumlah_terjual": 100,
-        "rating": 4.7,
-        "image_srcset": "image_b.jpg"
-    }
-]
-```
-
-### 2. Get Products with Pagination (GET)
-
-**Endpoint**: `/api/products`  
-**Method**: `GET`
-
-**Description**:  
-This endpoint returns product data with pagination. You can set the number of products per page and the page number using query parameters.
-
-**Query Parameters**:
-- `limit`: (optional) Number of products to return per page (default: 10).
-- `page`: (optional) The page number to retrieve (default: 1).
-
-**Example Request**:
-```
-GET /api/products?limit=10&page=2
-```
-
-**Response Example**:
-```json
-[
-    {
-        "product_id": 11,
-        "product_name": "Product K",
-        "product_price": 100000,
+        "product_id": "8365736d-599d-4489-a262-8dc270afeba6",
+        "product_name": "Product 1",
+        "product_price": 15000,
         "stok": 50,
-        "jumlah_terjual": 30,
-        "rating": 4.0,
-        "image_srcset": "image_k.jpg"
+        "jumlah_terjual": 100,
+        "rating": 4.5,
+        "image_srcset": "image1.jpg",
+        "kategori": "Kategori A"
     },
     {
-        "product_id": 12,
-        "product_name": "Product L",
-        "product_price": 120000,
-        "stok": 60,
-        "jumlah_terjual": 20,
-        "rating": 4.2,
-        "image_srcset": "image_l.jpg"
+        "product_id": "1234567-599d-4489-a262-8dc270afeba6",
+        "product_name": "Product 2",
+        "product_price": 25000,
+        "stok": 20,
+        "jumlah_terjual": 50,
+        "rating": 4.0,
+        "image_srcset": "image2.jpg",
+        "kategori": "Kategori B"
     }
 ]
 ```
 
-### 3. Get Products with Pagination (POST)
+---
 
-**Endpoint**: `/api/products`  
+### 2. Get Products with Pagination (GET Method)
+
+**Endpoint**: `/api/products`
+
+**Method**: `GET`
+
+**Deskripsi**: Mengambil daftar produk dengan pagination menggunakan query parameter `limit` dan `page`.
+
+#### Cara Penggunaan:
+```bash
+GET http://localhost:5000/api/products?limit=5&page=1
+```
+
+#### Query Parameters:
+- `limit`: Jumlah produk yang ingin diambil (default: 10)
+- `page`: Halaman data yang ingin diambil (default: 1)
+
+#### Response Contoh:
+```json
+[
+    {
+        "product_id": "8365736d-599d-4489-a262-8dc270afeba6",
+        "product_name": "Product 1",
+        "product_price": 15000,
+        "stok": 50,
+        "jumlah_terjual": 100,
+        "rating": 4.5,
+        "image_srcset": "image1.jpg",
+        "kategori": "Kategori A"
+    }
+]
+```
+
+---
+
+### 3. Get Products with Pagination (POST Method)
+
+**Endpoint**: `/api/products`
+
 **Method**: `POST`
 
-**Description**:  
-This endpoint allows you to retrieve product data with pagination using a JSON body. This is useful if you want to send pagination parameters in the request body.
+**Deskripsi**: Mengambil daftar produk dengan pagination menggunakan `limit` dan `page` yang dikirimkan melalui body JSON.
 
-**Request Body**:
-- `limit`: (optional) Number of products to return per page (default: 10).
-- `page`: (optional) The page number to retrieve (default: 1).
+#### Cara Penggunaan:
+```bash
+POST http://localhost:5000/api/products
+```
 
-**Example Request**:
+#### Body Request:
 ```json
 {
-  "limit": 10,
-  "page": 2
+    "limit": 5,
+    "page": 1
 }
 ```
 
-**Response Example**:
+#### Response Contoh:
 ```json
 [
     {
-        "product_id": 21,
-        "product_name": "Product U",
-        "product_price": 150000,
-        "stok": 100,
-        "jumlah_terjual": 90,
-        "rating": 4.7,
-        "image_srcset": "image_u.jpg"
-    },
-    {
-        "product_id": 22,
-        "product_name": "Product V",
-        "product_price": 180000,
-        "stok": 120,
-        "jumlah_terjual": 110,
-        "rating": 4.8,
-        "image_srcset": "image_v.jpg"
+        "product_id": "8365736d-599d-4489-a262-8dc270afeba6",
+        "product_name": "Product 1",
+        "product_price": 15000,
+        "stok": 50,
+        "jumlah_terjual": 100,
+        "rating": 4.5,
+        "image_srcset": "image1.jpg",
+        "kategori": "Kategori A"
     }
 ]
 ```
+
+---
 
 ### 4. Get Product by ID (GET Method)
-Retrieve a product by its `product_id`.
 
-**Endpoint**: `/api/products/<product_id>`  
+**Endpoint**: `/api/products/<product_id>`
+
 **Method**: `GET`
 
-#### URL:
-```
-GET api/products/<product_id>
-```
+**Deskripsi**: Mengambil detail produk berdasarkan `product_id`.
 
-#### Example:
+#### Cara Penggunaan:
 ```bash
-GET /api/products/00019f29-ef3b-4eb2-b078-0820081d9b3e
+GET http://localhost:5000/api/products/8365736d-599d-4489-a262-8dc270afeba6
 ```
 
-#### Response:
+#### Response Contoh:
 ```json
 {
-  "product_id": "123",
-  "product_name": "Product A",
-  "product_price": 10000,
-  "stok": 50,
-  "jumlah_terjual": 20,
-  "rating": 4.5,
-  "image_srcset": "/images/product_a.jpg",
-  "kategori": "Category 1",
-  "brand": "Brand A",
-  "min_pembelian": 1,
-  "berat_satuan": "500g",
-  "dimensi_ukuran": "10x10x10cm",
-  "dikirim_dari": "Jakarta",
-  "penjual": "Seller A",
-  "description": "Description of Product A"
+    "product_id": "8365736d-599d-4489-a262-8dc270afeba6",
+    "product_name": "Product 1",
+    "product_price": 15000,
+    "stok": 50,
+    "jumlah_terjual": 100,
+    "rating": 4.5,
+    "image_srcset": "image1.jpg",
+    "kategori": "Kategori A",
+    "brand": "Brand 1",
+    "min_pembelian": 1,
+    "berat_satuan": 200,
+    "dimensi_ukuran": "10x10x10",
+    "dikirim_dari": "Jakarta",
+    "penjual": "Penjual 1",
+    "description": "Deskripsi produk 1"
 }
 ```
 
-#### Error Response:
-If the product is not found:
-```json
-{
-  "error": "Product not found"
-}
-```
+---
 
 ### 5. Get Product by ID (POST Method)
-Retrieve a product by `product_id` using JSON request body.
 
+**Endpoint**: `/api/products_id`
 
-**Endpoint**: `/api/products_id`  
 **Method**: `POST`
 
-#### URL:
-```
-POST /api/products_id
+**Deskripsi**: Mengambil detail produk berdasarkan `product_id` yang dikirimkan melalui body JSON.
+
+#### Cara Penggunaan:
+```bash
+POST http://localhost:5000/api/products_id
 ```
 
-#### Request Body:
+#### Body Request:
 ```json
 {
-  "product_id": "00019f29-ef3b-4eb2-b078-0820081d9b3e"
+    "product_id": "8365736d-599d-4489-a262-8dc270afeba6"
 }
 ```
+
+#### Response Contoh:
+```json
+{
+    "product_id": "8365736d-599d-4489-a262-8dc270afeba6",
+    "product_name": "Product 1",
+    "product_price": 15000,
+    "stok": 50,
+    "jumlah_terjual": 100,
+    "rating": 4.5,
+    "image_srcset": "image1.jpg",
+    "kategori": "Kategori A",
+    "brand": "Brand 1",
+    "min_pembelian": 1,
+    "berat_satuan": 200,
+    "dimensi_ukuran": "10x10x10",
+    "dikirim_dari": "Jakarta",
+    "penjual": "Penjual 1",
+    "description": "Deskripsi produk 1"
+}
+```
+
+---
+
+### 6. Get Similar Products by Product ID
+
+**Endpoint**: `/api/product_similarity/<product_id>`
+
+**Method**: `GET`
+
+**Deskripsi**: Mengambil daftar produk yang mirip berdasarkan `product_id` menggunakan perhitungan cosine similarity.
+
+#### Cara Penggunaan:
+```bash
+GET http://localhost:5000/api/product_similarity/8365736d-599d-4489-a262-8dc270afeba6
+```
+
+#### Response Contoh:
+```json
+[
+    {
+        "product_id": "1234567-599d-4489-a262-8dc270afeba6",
+        "product_name": "Product 2",
+        "product_price": 25000,
+        "stok": 20,
+        "jumlah_terjual": 50,
+        "rating": 4.0,
+        "image_srcset": "image2.jpg",
+        "kategori": "Kategori B",
+        "cosine_similarity": 0.85
+    },
+    {
+        "product_id": "7890123-599d-4489-a262-8dc270afeba6",
+        "product_name": "Product 3",
+        "product_price": 30000,
+        "stok": 15,
+        "jumlah_terjual": 70,
+        "rating": 4.8,
+        "image_srcset": "image3.jpg",
+        "kategori": "Kategori C",
+        "cosine_similarity": 0.82
+    }
+]
+```
+
 
 #### Response:
 Same as the GET method for retrieving a product by ID.
@@ -219,6 +274,16 @@ All endpoints will return a JSON response with an error message in case of failu
   "error": "Product not found"
 }
 ```
+
+
+---
+
+## Teknologi yang Digunakan
+- **Flask**: Web framework untuk Python.
+- **PySpark**: Library untuk pemrosesan data besar dengan Spark.
+- **PostgreSQL**: Database untuk menyimpan data produk.
+
+---
 
 ---
 
