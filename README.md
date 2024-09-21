@@ -10,6 +10,7 @@ This API allows you to retrieve product data from a PostgreSQL database and Mach
 4. Retrieve product data with products_id using GET method.
 5. Retrieve product data with products_id using POST method.
 6. Get Similar Products (Recomendations) by Product ID using GET method.
+7. Get Best Product from AI analysis
 
 The data is loaded from the PostgreSQL database into memory at the start of the application for faster response times.
 
@@ -256,18 +257,35 @@ GET http://localhost:5000/api/product_similarity/8365736d-599d-4489-a262-8dc270a
 ]
 ```
 
+### 7. Get Best Product from AI analysis
 
-#### Response:
-Same as the GET method for retrieving a product by ID.
+**Endpoint**: `/api/ai-best-products`
 
-#### Error Response:
-If `product_id` is missing in the request body:
-```json
-{
-  "error": "Missing product_id in the request body"
-}
+**Method**: `POST`
+
+**Deskripsi**: Endpoint ini digunakan untuk mengirim daftar `product_id` ke server dan menerima rekomendasi produk terbaik berdasarkan analisis AI. AI akan memilih produk terbaik dari daftar yang diberikan berdasarkan kriteria yang telah ditentukan, seperti popularitas, relevansi, atau faktor lain yang diukur oleh algoritma.
+
+#### Cara Penggunaan:
+```bash
+POST http://localhost:5000/api/ai-best-products
 ```
 
+#### Body Request:
+```json
+{
+    "product_ids": [
+        "9bf12451-5274-438a-8d3f-26772d4564a6",
+        "9555ced5-5d30-4e7c-b592-d4bbb1a3e049"
+    ]
+}
+
+```
+#### Response Contoh:
+```json
+{
+    "comparison_result": "Hallo Digistar!\n\nBerikut adalah hasil analisis produk-produk yang dibandingkan:\n\n**MICROWAVE OVEN MODENA MG 2516 100% ORI Free OngKir seJakarta (Produk A)**\n* Keunggulan:\na. Garansi resmi produk selama 1 tahun untuk service dan sparepart, serta 2 tahun untuk magnetron.\nb. Fitur yang lengkap seperti touch control panel, child lock, dan interior light.\nc. Kapasitas oven 25 Liter yang besar.\n* Kekurangan:\na. Harga yang relatif lebih mahal (Rp 3.909.000).\nb. Dimensi produk yang besar (55x40x60cm).\nc. Berat volume produk yang besar (22.00kg).\n\n**BEKO MGB25332BG MICROWAVE AND GRILL 100% ORI Free OngKir seJakarta (Produk B)**\n* Keunggulan:\na. Harga yang relatif lebih murah (Rp 3.601.000).\nb. Dimensi produk yang lebih kecil (60x40x40cm).\nc. Berat volume produk yang lebih ringan (16.00kg).\n* Kekurangan:\na. Garansi resmi produk hanya 1 tahun untuk service dan sparepart.\nb. Fitur yang kurang lengkap dibandingkan dengan Produk A.\nc. Kapasitas oven 25 Liter yang sama dengan Produk A.\n\nSaya rekomendasikan **BEKO MGB25332BG MICROWAVE AND GRILL 100% ORI Free OngKir seJakarta** Untuk anda beli Karena harga yang lebih murah dan dimensi produk yang lebih kecil.\n\nTerima Kasih, Jangan Lupa Checkout"
+}
+```
 
 ---
 
