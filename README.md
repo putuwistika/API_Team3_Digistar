@@ -11,6 +11,7 @@ This API allows you to retrieve product data from a PostgreSQL database and Mach
 5. Retrieve product data with products_id using POST method.
 6. Get Similar Products (Recomendations) by Product ID using GET method.
 7. Get Best Product from AI analysis
+8. Get Product with Search by Product Name using GET method.
 
 The data is loaded from the PostgreSQL database into memory at the start of the application for faster response times.
 
@@ -286,6 +287,50 @@ POST http://localhost:5000/api/ai-best-products
     "comparison_result": "Hallo Digistar!\n\nBerikut adalah hasil analisis produk-produk yang dibandingkan:\n\n**MICROWAVE OVEN MODENA MG 2516 100% ORI Free OngKir seJakarta (Produk A)**\n* Keunggulan:\na. Garansi resmi produk selama 1 tahun untuk service dan sparepart, serta 2 tahun untuk magnetron.\nb. Fitur yang lengkap seperti touch control panel, child lock, dan interior light.\nc. Kapasitas oven 25 Liter yang besar.\n* Kekurangan:\na. Harga yang relatif lebih mahal (Rp 3.909.000).\nb. Dimensi produk yang besar (55x40x60cm).\nc. Berat volume produk yang besar (22.00kg).\n\n**BEKO MGB25332BG MICROWAVE AND GRILL 100% ORI Free OngKir seJakarta (Produk B)**\n* Keunggulan:\na. Harga yang relatif lebih murah (Rp 3.601.000).\nb. Dimensi produk yang lebih kecil (60x40x40cm).\nc. Berat volume produk yang lebih ringan (16.00kg).\n* Kekurangan:\na. Garansi resmi produk hanya 1 tahun untuk service dan sparepart.\nb. Fitur yang kurang lengkap dibandingkan dengan Produk A.\nc. Kapasitas oven 25 Liter yang sama dengan Produk A.\n\nSaya rekomendasikan **BEKO MGB25332BG MICROWAVE AND GRILL 100% ORI Free OngKir seJakarta** Untuk anda beli Karena harga yang lebih murah dan dimensi produk yang lebih kecil.\n\nTerima Kasih, Jangan Lupa Checkout"
 }
 ```
+
+### 8. Get Product with Search by Product Name using GET method.
+
+**Endpoint**: `/api/search`
+
+**Method**: `GET`
+
+**Deskripsi**: 
+Deskripsi: Endpoint ini digunakan untuk mencari produk berdasarkan nama. Pengguna dapat mengirimkan parameter product_name dalam query URL untuk mendapatkan daftar produk yang cocok dengan nama yang dicari. Pencarian bersifat tidak sensitif terhadap huruf besar-kecil (case-insensitive).
+
+#### Cara Penggunaan:
+
+```bash
+GET http://localhost:5000/api/search?product_name=T-Shirt
+```
+
+#### Response Contoh:
+
+```json
+[
+  {
+    "product_id": "123",
+    "product_name": "T-Shirt",
+    "product_price": 150000,
+    "stok": 50,
+    "jumlah_terjual": 100,
+    "rating": 4.5,
+    "image_srcset": "image.jpg",
+    "kategori": "Fashion"
+  },
+  {
+    "product_id": "124",
+    "product_name": "Cool T-Shirt",
+    "product_price": 160000,
+    "stok": 30,
+    "jumlah_terjual": 75,
+    "rating": 4.7,
+    "image_srcset": "cool_image.jpg",
+    "kategori": "Fashion"
+  }
+]
+
+```
+
 
 ---
 

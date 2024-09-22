@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "45c94263-acea-445a-9990-e3c31200a988",
-		"name": "Product API Test",
+		"name": "Product API Test - BackEnd-Team3-Digistar",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "38018484"
 	},
@@ -189,6 +189,35 @@
 					"path": [
 						"api",
 						"ai-best-products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Search Product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/api/search?product_name=T-Shirt",
+					"protocol": "http",
+					"host": [
+						"134",
+						"209",
+						"105",
+						"5"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"search"
+					],
+					"query": [
+						{
+							"key": "product_name",
+							"value": "T-Shirt"
+						}
 					]
 				}
 			},
