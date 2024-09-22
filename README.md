@@ -264,7 +264,7 @@ GET http://localhost:5000/api/product_similarity/8365736d-599d-4489-a262-8dc270a
 
 **Method**: `POST`
 
-**Deskripsi**: Endpoint ini digunakan untuk mengirim daftar `product_id` ke server dan menerima rekomendasi produk terbaik berdasarkan analisis AI. AI akan memilih produk terbaik dari daftar yang diberikan berdasarkan kriteria yang telah ditentukan, seperti popularitas, relevansi, atau faktor lain yang diukur oleh algoritma.
+**Deskripsi**: Endpoint ini digunakan untuk mengirim daftar `product_id` ke server dan menerima rekomendasi produk terbaik berdasarkan analisis AI. AI akan memilih produk terbaik dari daftar yang diberikan berdasarkan kriteria yang telah ditentukan, seperti popularitas, relevansi, atau faktor lain yang diukur oleh algoritma akan memeberikan respons product_id yang terbaik dan analisisnya.
 
 #### Cara Penggunaan:
 ```bash
@@ -275,8 +275,9 @@ POST http://localhost:5000/api/ai-best-products
 ```json
 {
     "product_ids": [
-        "9bf12451-5274-438a-8d3f-26772d4564a6",
-        "9555ced5-5d30-4e7c-b592-d4bbb1a3e049"
+        "0315f77f-bf1f-4411-8282-2d23ea298998",
+        "2d6cbb25-a484-441f-b0cc-dbace5925299",
+        "3eb67e65-14f3-4f2f-9bcd-d97dcbb67f15"
     ]
 }
 
@@ -284,7 +285,8 @@ POST http://localhost:5000/api/ai-best-products
 #### Response Contoh:
 ```json
 {
-    "comparison_result": "Hallo Digistar!\n\nBerikut adalah hasil analisis produk-produk yang dibandingkan:\n\n**MICROWAVE OVEN MODENA MG 2516 100% ORI Free OngKir seJakarta (Produk A)**\n* Keunggulan:\na. Garansi resmi produk selama 1 tahun untuk service dan sparepart, serta 2 tahun untuk magnetron.\nb. Fitur yang lengkap seperti touch control panel, child lock, dan interior light.\nc. Kapasitas oven 25 Liter yang besar.\n* Kekurangan:\na. Harga yang relatif lebih mahal (Rp 3.909.000).\nb. Dimensi produk yang besar (55x40x60cm).\nc. Berat volume produk yang besar (22.00kg).\n\n**BEKO MGB25332BG MICROWAVE AND GRILL 100% ORI Free OngKir seJakarta (Produk B)**\n* Keunggulan:\na. Harga yang relatif lebih murah (Rp 3.601.000).\nb. Dimensi produk yang lebih kecil (60x40x40cm).\nc. Berat volume produk yang lebih ringan (16.00kg).\n* Kekurangan:\na. Garansi resmi produk hanya 1 tahun untuk service dan sparepart.\nb. Fitur yang kurang lengkap dibandingkan dengan Produk A.\nc. Kapasitas oven 25 Liter yang sama dengan Produk A.\n\nSaya rekomendasikan **BEKO MGB25332BG MICROWAVE AND GRILL 100% ORI Free OngKir seJakarta** Untuk anda beli Karena harga yang lebih murah dan dimensi produk yang lebih kecil.\n\nTerima Kasih, Jangan Lupa Checkout"
+    "best_product_id": "2d6cbb25-a484-441f-b0cc-dbace5925299",
+    "comparison_result": "Hallo Digistar!\n\nBerikut adalah hasil analisis produk-produk yang dibandingkan:\n\n**Produk A: Tas Selempang Pria Kulit Sapi Asli Tas Slempang Punggung Kulit sapi Hazar Bag Pria Desain Stylish**\n* Keunggulan:\na. Bahan kulit sapi asli premium jenis CRAZY HORSE yang awet dan mudah dibersihkan.\nb. Desain klasik dan trendy yang menarik.\nc. Memiliki kapasitas besar dan dua ruang tambahan untuk menyimpan barang dan kartu penting.\n* Kekurangan:\na. Harga yang relatif mahal (Rp225000).\nb. Jumlah terjual 0, sehingga keaslian produk tidak dapat dipastikan.\nc. Penjual REVEN KREATIF INDUSTRI tidak memiliki reputasi yang baik.\n\n**Produk B: EURASIA BAG (Square)**\n* Keunggulan:\na. Harga yang relatif murah (Rp110000).\nb. Desain sederhana dan modern.\nc. Memiliki ukuran yang besar dan dapat menyimpan banyak barang.\n* Kekurangan:\na. Bahan yang tidak diketahui, sehingga kualitasnya tidak dapat dipastikan.\nb. Jumlah terjual 0, sehingga keaslian produk tidak dapat dipastikan.\nc. Penjual Kios MitRAO tidak memiliki reputasi yang baik.\n\n**Produk C: Redivivus - Bisma Cork Mix Canvas Waist Bag / Tas Pinggang / Recycled**\n* Keunggulan:\na. Bahan yang unik dan eco-friendly, yaitu campuran kulit karet dan kanvas.\nb. Desain yang modern dan stylish.\nc. Memiliki ukuran yang besar dan dapat menyimpan banyak barang.\n* Kekurangan:\na. Harga yang relatif mahal (Rp363000).\nb. Bahan yang tidak diketahui, sehingga kualitasnya tidak dapat dipastikan.\nc. Jumlah terjual 0, sehingga keaslian produk tidak dapat dipastikan.\n\nSaya rekomendasikan **Produk C: Redivivus - Bisma Cork Mix Canvas Waist Bag / Tas Pinggang / Recycled** Untuk anda beli Karena **kualitas bahan yang unik dan eco-friendly, serta desain yang modern dan stylish**.\n\nTerima Kasih, Jangan Lupa Checkout"
 }
 ```
 
